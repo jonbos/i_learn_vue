@@ -1,7 +1,18 @@
 import * as Vue from "vue/dist/vue.esm-bundler.js";
+const Hello = {
+  template: `
+    <p>{{greeting}} !</p>
+  `,
+  props: ["greeting"],
+};
 const app = Vue.createApp({
+  components: {
+    Hello,
+  },
   template: `
   <div>
+
+  <hello greeting="Hello"/>
   <button v-on:click="increment">Increment</button>
   <p> {{ count }} </p>
   <div v-bind:class="getClass(number)" v-for="number in numbers"> 
@@ -31,7 +42,7 @@ const app = Vue.createApp({
     return {
       count: 0,
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      value: ['a'],
+      value: ["a"],
     };
   },
   methods: {
@@ -50,11 +61,10 @@ const app = Vue.createApp({
       return this.numbers.filter((x) => this.isEven(x));
     },
     error() {
-      if (this.value.length < 5){
-        return 'Must be 5 characters'
+      if (this.value.length < 5) {
+        return "Must be 5 characters";
       }
-    }
-
+    },
   },
 });
 app.mount("#app");
