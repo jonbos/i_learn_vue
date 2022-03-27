@@ -1,9 +1,5 @@
 <template>
-  <button 
-    v-bind:style="{ background, color }" 
-    v-bind:disabled="!disabled">
-    Static
-  </button>
+  <button :style="{ background, color }" :disabled="!disabled">Static</button>
 </template>
 
 <script>
