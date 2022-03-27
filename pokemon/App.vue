@@ -4,9 +4,37 @@
     <div class="content">Content</div>
     <div class="description">Description</div>
   </div>
+  <button @click="fetchData">Fetch</button>
 </template>
+<script>
+const ids = [1, 4, 7];
+const api = "https://pokeapi.co/api/v2/pokemon";
 
+export default {
+  data() {
+    return { pokemon: [] };
+  },
+  methods: {
+    async fetchData() {
+      const responses = await Promise.all(
+        ids.map((id) =>
+          window
+            .fetch(`${api}/${id}`)
+            .then((d) => d.json())
+            .then((datum) => ({
+              id: datum.id,
+              name: datum.name,
+              sprite: datum.sprites.other["official-artwork"].front_default,
+              types: datum.types.map((type) => type.type.name),
+            }))
+        )
+      );
 
+      this.pokemon = responses;
+    },
+  },
+};
+</script>
 <style scoped>
 .card {
   border: 1px solid silver;
