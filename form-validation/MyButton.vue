@@ -1,10 +1,14 @@
 <template>
-  <button :style="{ background, color }" :disabled="!disabled">Static</button>
+  <button :style="{ background, color }" :disabled="!disabled">{{name}}</button>
 </template>
 
 <script>
 export default {
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     background: {
       type: String,
     },

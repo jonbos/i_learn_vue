@@ -3,7 +3,7 @@
     <label :for="name"> {{ name }} </label>
     <div class="error">{{ error }}</div>
   </div>
-  <input @input="input" type="text" :id="name" :value="value" />
+  <input @input="input" :type="type" :id="name" :value="value" />
 </template>
 <script>
 export default {
@@ -23,6 +23,10 @@ export default {
     error: {
       type: String,
       required: false,
+    },
+    type: {
+      type: String,
+      default: "text"
     },
   },
   computed: {},
