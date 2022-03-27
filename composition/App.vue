@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div>{{ msg }}</div>
-    <input type="text" v-model="msg" />
+    <button @click="increment">{{ count }}</button>
   </div>
 </template>
 
@@ -10,11 +9,20 @@ import { ref } from 'vue';
 
 export default {
   setup() {
-    const msg = ref('Hello World');
-    return { msg };
+    const count = ref(0);
+
+    const increment = () => {
+      count.value += 1;
+    };
+    return { count, increment };
   },
 };
 </script>
 
 <style scoped>
+button {
+  height: 100px;
+  width: 100px;
+  font-size: 2rem;
+}
 </style>
