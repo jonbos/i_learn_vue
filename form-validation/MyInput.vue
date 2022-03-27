@@ -20,25 +20,35 @@ export default {
       type: String,
       required: true,
     },
-  },
-  computed: {
-    error() {
-      if (this.rules.required && this.value.length === 0) {
-        return "This field is required";
-      }
-
-      if (this.rules.min && this.value.length < this.rules.min) {
-        return `Length must be longer than ${this.rules.min}`;
-      }
+    error: {
+      type: String,
+      required: false,
     },
   },
+  computed: {},
   methods: {
     input($event) {
       this.$emit("update", {
         name: this.name.toLowerCase(),
         value: $event.target.value,
+        error: this.validate($event.target.value),
       });
     },
+    validate(value) {
+      if (this.rules.required && value.length === 0) {
+        return "This field is required";
+      }
+      if (this.rules.min && value.length < this.rules.min) {
+        return `Length must be longer than ${this.rules.min}`;
+      }
+    },
+  },
+  created() {
+    this.$emit("update", {
+      name: this.name.toLowerCase(),
+      value: this.value,
+      error: this.validate(this.value),
+    });
   },
 };
 </script>
