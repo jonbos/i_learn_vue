@@ -27,13 +27,13 @@ export default {
     },
     type: {
       type: String,
-      default: "text"
+      default: 'text',
     },
   },
   computed: {},
   methods: {
     input($event) {
-      this.$emit("update", {
+      this.$emit('update', {
         name: this.name.toLowerCase(),
         value: $event.target.value,
         error: this.validate($event.target.value),
@@ -41,7 +41,7 @@ export default {
     },
     validate(value) {
       if (this.rules.required && value.length === 0) {
-        return "This field is required";
+        return 'This field is required';
       }
       if (this.rules.min && value.length < this.rules.min) {
         return `Length must be longer than ${this.rules.min}`;
@@ -49,7 +49,7 @@ export default {
     },
   },
   created() {
-    this.$emit("update", {
+    this.$emit('update', {
       name: this.name.toLowerCase(),
       value: this.value,
       error: this.validate(this.value),

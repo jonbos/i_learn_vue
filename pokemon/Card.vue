@@ -17,6 +17,9 @@ export default {
 };
 </script>
 <style scoped>
+.opace {
+  opacity: 0.5;
+}
 .card {
   border: 1px solid silver;
   border-radius: 8px;
@@ -43,5 +46,6 @@ export default {
 .card:hover {
   transition: 0.2s;
   box-shadow: 0px 1px 9px darkgrey;
+  opacity: 1
 }
 </style>
