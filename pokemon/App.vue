@@ -4,7 +4,9 @@
       v-for="pokemon in pokemons"
       :key="pokemon.id"
       :pokemon="pokemon">
+        <template v-slot:title>
         {{ pokemon.name }}
+        </template>
       </card>
   </div>
 </template>

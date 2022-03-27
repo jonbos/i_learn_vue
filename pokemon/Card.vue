@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="title"><slot/></div>
+    <div class="title"><slot name="title" /></div>
     <div class="content"><img :src="pokemon.sprite" alt="" /></div>
     <div class="description">
       <div v-for="type in pokemon.types" :key="type">
