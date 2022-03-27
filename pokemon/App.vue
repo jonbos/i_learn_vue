@@ -1,35 +1,40 @@
 <template>
-  <div class="card">
-    <div class="title">Title</div>
-    <div class="content">Content</div>
-    <div class="description">Description</div>
+  <div class="cards">
+    <div class="card" v-for="p in pokemon" :key="p.id">
+      <div class="title">{{ p.name }}</div>
+      <div class="content"><img :src="p.sprite" alt="" /></div>
+      <div class="description">
+        <div v-for="type in p.types" :key="type">
+          {{ type }}
+        </div>
+      </div>
+    </div>
   </div>
-  <button @click="fetchData">Fetch</button>
 </template>
 <script>
 const ids = [1, 4, 7];
-const api = "https://pokeapi.co/api/v2/pokemon";
+const api = 'https://pokeapi.co/api/v2/pokemon';
 
 export default {
   data() {
     return { pokemon: [] };
   },
+  created() {
+    this.fetchData();
+  },
   methods: {
     async fetchData() {
       const responses = await Promise.all(
-        ids.map((id) =>
-          window
-            .fetch(`${api}/${id}`)
-            .then((d) => d.json())
-            .then((datum) => ({
-              id: datum.id,
-              name: datum.name,
-              sprite: datum.sprites.other["official-artwork"].front_default,
-              types: datum.types.map((type) => type.type.name),
-            }))
-        )
+        ids.map((id) => window
+          .fetch(`${api}/${id}`)
+          .then((d) => d.json())
+          .then((datum) => ({
+            id: datum.id,
+            name: datum.name,
+            sprite: datum.sprites.other['official-artwork'].front_default,
+            types: datum.types.map((type) => type.type.name),
+          }))),
       );
-
       this.pokemon = responses;
     },
   },
@@ -62,5 +67,11 @@ export default {
 .card:hover {
   transition: 0.2s;
   box-shadow: 0px 1px 9px darkgrey;
+}
+img {
+  width: 100%;
+}
+.cards {
+  display: flex;
 }
 </style>
