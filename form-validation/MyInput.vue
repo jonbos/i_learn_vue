@@ -3,7 +3,7 @@
     <label :for="name"> {{ name }} </label>
     <div class="error">{{ error }}</div>
   </div>
-  <input type="text" v-bind:id="name" v-model="value" />
+  <input @input="input" type="text" :id="name" :value="value" />
 </template>
 <script>
 export default {
@@ -16,11 +16,10 @@ export default {
       type: Object,
       default: {},
     },
-  },
-  data() {
-    return {
-      value: "",
-    };
+    value: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     error() {
@@ -31,6 +30,14 @@ export default {
       if (this.rules.min && this.value.length < this.rules.min) {
         return `Length must be longer than ${this.rules.min}`;
       }
+    },
+  },
+  methods: {
+    input($event) {
+      this.$emit("update", {
+        name: this.name.toLowerCase(),
+        value: $event.target.value,
+      });
     },
   },
 };
