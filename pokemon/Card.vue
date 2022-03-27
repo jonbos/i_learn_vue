@@ -1,22 +1,19 @@
 <template>
   <div class="card">
-    <div class="title"><slot name="title" /></div>
-    <div class="content"><img :src="pokemon.sprite" alt="" /></div>
+    <div class="title">
+      <slot name="title" />
+    </div>
+    <div class="content">
+      <slot name="content" />
+    </div>
     <div class="description">
-      <div v-for="type in pokemon.types" :key="type">
-        {{ type }}
-      </div>
+      <slot name="description" />
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: {
-    pokemon: {
-      type: Object,
-      required: true,
-    },
-  },
+  props: {},
 };
 </script>
 <style scoped>
@@ -46,8 +43,5 @@ export default {
 .card:hover {
   transition: 0.2s;
   box-shadow: 0px 1px 9px darkgrey;
-}
-img {
-  width: 100%;
 }
 </style>

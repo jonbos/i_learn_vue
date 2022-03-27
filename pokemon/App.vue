@@ -1,13 +1,19 @@
 <template>
   <div class="cards">
-      <card
-      v-for="pokemon in pokemons"
-      :key="pokemon.id"
-      :pokemon="pokemon">
-        <template v-slot:title>
+    <card v-for="pokemon in pokemons" :key="pokemon.id">
+      <template v-slot:title>
         {{ pokemon.name }}
-        </template>
-      </card>
+      </template>
+      <template v-slot:content>
+        <img :src="pokemon.sprite" alt="" />
+      </template>
+
+      <template v-slot:description>
+        <div v-for="type in pokemon.types" :key="type">
+          {{ type }}
+        </div>
+      </template>
+    </card>
   </div>
 </template>
 <script>
@@ -45,5 +51,8 @@ export default {
 <style scoped>
 .cards {
   display: flex;
+}
+img {
+  width: 100%;
 }
 </style>
