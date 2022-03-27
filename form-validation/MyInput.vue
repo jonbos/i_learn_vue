@@ -7,6 +7,7 @@
 </template>
 <script>
 export default {
+  emits: ['update'],
   props: {
     name: {
       type: String,
