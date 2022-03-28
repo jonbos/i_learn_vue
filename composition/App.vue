@@ -1,9 +1,10 @@
 <template>
   <div>
     <button @click="increment">{{ count }}</button>
-    <button @click="increase('a')">{{ numbers.a }}</button>
-    <button @click="increase('b')">{{ numbers.b }}</button>
+    <button @click="a++">{{ a }}</button>
+    <button @click="b++">{{ b }}</button>
     <p>{{ total }}</p>
+    <div v-for="msg in history" :key="msg">{{ msg }}</div>
   </div>
 </template>
 
@@ -18,15 +19,23 @@ export default {
     const count = ref(0);
 
     // reactive good for obj
-    const numbers = reactive({ a: 1, b: 2 });
-
+    const a = ref(0);
+    const b = ref(0);
+    const history = ref([]);
     const increment = () => {
       count.value += 1;
     };
-    const increase = (n) => {
-      numbers[n] += 1;
-    };
-    const total = computed(() => count.value + numbers.a + numbers.b);
+    const total = computed(() => count.value + a.value + b.value);
+
+    watch([a, b], ([newA, newB], [oldA, oldB]) => {
+      if (newA !== oldA) {
+        history.value.push(`A: ${oldA} -> ${newA}`);
+      }
+      if (newB !== oldB) {
+        history.value.push(`B: ${oldB} -> ${newB}`);
+      }
+    });
+
     // useful for route params
     // watch(
     //   count,
@@ -38,15 +47,16 @@ export default {
     //   },
     // );
 
-    watchEffect(() => {
-      console.log(count.value);
-    });
+    // watchEffect(() => {
+    //   console.log(count.value);
+    // });
     return {
       count,
       total,
+      history,
       increment,
-      numbers,
-      increase,
+      a,
+      b,
     };
   },
 };
