@@ -28,15 +28,19 @@ export default {
     };
     const total = computed(() => count.value + numbers.a + numbers.b);
     // useful for route params
-    watch(
-      count,
-      (newVal) => {
-        console.log(`${newVal}`);
-      },
-      {
-        immediate: true,
-      },
-    );
+    // watch(
+    //   count,
+    //   (newVal) => {
+    //     console.log(`${newVal}`);
+    //   },
+    //   {
+    //     immediate: true,
+    //   },
+    // );
+
+    watchEffect(() => {
+      console.log(count.value);
+    });
     return {
       count,
       total,
